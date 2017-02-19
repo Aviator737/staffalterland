@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Task Images</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @task_images.each do |task_image| %>
+      <tr>
+        <td><%= task_image.task_id %></td>
+        <td><%= task_image.image %></td>
+        <td><%= link_to 'Show', task_image %></td>
+        <td><%= link_to 'Edit', edit_task_image_path(task_image) %></td>
+        <td><%= link_to 'Destroy', task_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Task Image', new_task_image_path %>

@@ -1,0 +1,18 @@
+<% content_for :head do %>
+    <title>Задачи Alterland</title>
+<% end %>
+
+<p><%= @task.id %></p>
+<p><%= @task.title %></p>
+<p><%= @task.workers %></p>
+<p><%= @task.time %></p>
+<p><%= @task.coords %></p>
+<p><%= @task.created_at %></p>
+<p>
+<% @task_image.each do |p| %>
+    <%= image_tag p.image_url %>
+    <%= link_to "Edit Attachment", edit_task_image_path(p) %>
+<% end %>
+</p>
+
+<%= link_to 'Back', task_index_path %>

@@ -1,0 +1,122 @@
+.wrapper {
+    position: relative;
+    min-height: 100%;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.alterland-header-bar.centered {
+    height: 83px;
+}
+
+.main {
+    padding-bottom: 100px;
+}
+.content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.banner {
+    text-align: center;
+}
+
+.banner h2 {
+    margin-bottom: 15px;
+}
+.banner h2 {
+    font-family: 'Open Sans', arial;
+    -webkit-font-smoothing: antialiased;
+    color: #555;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 580px){
+    .alterland-header-bar.centered {
+        height: 73px;
+    }
+}
+@media screen and (max-width: 800px),screen and (max-height: 800px){
+    .alterland-header-bar.centered {
+        height: 83px;
+    }
+}
+.alterland-header-bar.centered {
+    border: 0;
+    height: 73px;
+}
+.alterland-header-bar {
+    height: 71px;
+    border-bottom: 1px solid #e5e5e5;
+    overflow: hidden;
+}
+
+.header .logo {
+    float: none;
+    margin: 20px auto 15px;
+    background-image: url(logo.jpg);
+    background-size: 116px 38px;
+    height: 38px;
+    width: 116px;
+}
+
+.main-content
+{
+    position: relative;
+    width: 100%;
+}
+.group{
+    position:relative;
+    margin-bottom:20px;
+}
+
+.main-form{
+    padding-top: 40px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.main-form a{
+    color:#2196F3;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    text-decoration: none;
+}
+.center-link{
+    padding-top: 10px;
+    text-align: center;
+}
+.one-alterland p{
+    margin: 0 0 10px;
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+}
+
+.session-card.mdl-card{
+    margin: auto;
+    height: 500px;
+    width: 350px;
+}
+.session-card.mdl-card__title{
+    height: 150px;
+    background-color: #2196F3;
+}
+.session-card.mdl-card__title-text{
+    color: #FAFAFA;
+    font-size: 20px;
+}
+.mdl-textfield__label{
+    color: rgba(0,0,0, 0.70);
+}
+.mdl-button--accent.mdl-button--accent.mdl-button--raised, .mdl-button--accent.mdl-button--accent.mdl-button--fab{
+    background-color: #3F51B5;
+}
+.mdl-card__menu{
+    right: inherit;
+    margin-left: 10px;
+}

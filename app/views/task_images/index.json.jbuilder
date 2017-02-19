@@ -1,0 +1,1 @@
+json.array! @task_images, partial: 'task_images/task_image', as: :task_image

@@ -1,0 +1,97 @@
+<% content_for :head do %>
+    <title>Все задачи - AlterLand</title>
+<% end %>
+<div class="page-header mdl-color--grey-400 mdl-shadow--2dp">
+  <div class="page-header-text mdl-color-text--white">
+    <h3>Задания</h3>
+    <h4>Используйте фильтры, для удобного подбора</h4>
+  </div>
+</div>
+<div class="mdl-grid">
+  <div class="mdl-cell mdl-cell--3-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+    <!--
+    <div class="filters-block">
+      <div class="mdl-color-text--blue-grey-400">
+        <h3>Фильтры</h3>
+        <p>Используйте фильтры ниже, для сортировки задач</p>
+
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+          <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked>
+          <span class="mdl-checkbox__label">Для архитекторов</span>
+        </label>
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+          <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked>
+          <span class="mdl-checkbox__label">Для билдеров</span>
+        </label>
+        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-3">
+          <input type="checkbox" id="checkbox-3" class="mdl-checkbox__input" checked>
+          <span class="mdl-checkbox__label">Для хелперов</span>
+        </label>
+        <form action="#">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="sample3">
+            <label class="mdl-textfield__label" for="sample3">Поиск по названию...</label>
+          </div>
+        </form>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Сбросить</button>
+      </div>
+    </div>
+    -->
+  </div>
+  <div class="mdl-cell mdl-cell--9-col mdl-cell--12-col-tablet mdl-cell--12-col-phone">
+    <div class="task-rows">
+    <ul>
+        <% @task.each do |task| %>
+          <li>
+        <div class="task-card mdl-card mdl-shadow--2dp">
+
+          <div class="mdl-card__title" style="background-image: url(''); min-height: 200px; background-size: 100%; background-repeat: no-repeat; background-position: center; opacity: 0.8;position: relative; padding: 0;">
+            <div class="task-name">
+              <h2 class="mdl-card__title-text f14">Задание №<%= task.id%>, <%= task.title%></h2>
+            </div>
+          </div>
+          <div class="tags mdl-shadow--2dp">
+            <span class="tag">Коттедж</span>
+            <span class="tag">Эконом класс</span>
+            <span class="tag">Для билдеров</span>
+            <div class="f-right">
+
+              <%if current_account.group!='5'%>
+              <%= link_to 'Подробнее' , task_path(task), class: "mdl-button mdl-js-button mdl-button--primary" %>
+              <% end %>
+
+              <%if current_account.group=='5'%>
+                  <%= link_to task_path(task), class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                      <%= content_tag(:i, "expand_more",:class=>'material-icons') -%>
+                  <% end %>
+
+              <button id="task<%= task.id %>2" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple">
+                <i class="material-icons f16">pin_drop</i>
+                <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span>
+              </button><div class="mdl-tooltip" data-mdl-for="task<%= task.id %>2">Телепортировать меня</div>
+
+              <button id="task<%= task.id %>3" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" data-upgraded=",MaterialButton,MaterialRipple">
+                <i class="material-icons f18">edit</i>
+                <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span>
+              </button><div class="mdl-tooltip" data-mdl-for="task<%= task.id %>3">Редактировать</div>
+
+              <%= link_to task_path(task), method: :delete,data: { confirm: 'Вы уверены?' }, class: "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do %>
+                  <%= content_tag(:i, "clear",:class=>'material-icons f18 mdl-color-text--red-400') -%>
+              <% end %>
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+          </li>
+        <% end %>
+    </ul>
+    </div>
+  </div>
+</div>
+
+<%if current_account.group=='5'%>
+  <%= link_to task_new_path, class: "mdl-button mdl-js-button mdl-button--fab mdl-button--colored" do %>
+      <%= content_tag(:i, "add",:class=>'material-icons') -%>
+  <% end %>
+<% end %>

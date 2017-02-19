@@ -1,0 +1,68 @@
+<% content_for :head do %>
+    <title>Аккаунт - AlterLand</title>
+    <%= stylesheet_link_tag "devise.css" %>
+<% end %>
+
+<div class = "wrapper">
+
+  <div class = "alterland-header-bar centered">
+    <div class = "header content clearfix">
+      <div class="logo"></div>
+    </div>
+  </div>
+
+  <div class = "main content clearfix">
+    <div class="banner">
+      <h2>
+        Здравствуйте! Выполните вход.
+      </h2>
+    </div>
+        <div class = "session-card mdl-card mdl-shadow--2dp">
+          <div class="session-card mdl-card__title mdl-shadow--2dp">
+            <h2 class="session-card mdl-card__title-text">Выполните вход</h2>
+          </div>
+          <div class = "main-form">
+
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                <%= devise_error_messages! %>
+                <div class="group">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <%= f.email_field :email , class: 'mdl-textfield__input', id: 'email'%>
+                    <label class="mdl-textfield__label" for="email">Email</label>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <%= f.password_field :password, autocomplete: "off" , class: 'mdl-textfield__input', id: 'email'%>
+                    <label class="mdl-textfield__label" for="email">Пароль</label>
+                  </div>
+                </div>
+
+                <% if devise_mapping.rememberable? -%>
+                  <div class="group">
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="remember_me">
+                      <%= f.check_box :remember_me , class: 'mdl-checkbox__input', id: 'remember_me', type: 'checkbox'%>
+                      <span class="mdl-checkbox__label">Запомнить меня</span>
+                    </label>
+                  </div>
+                <% end -%>
+
+                <div class="group">
+                  <div style="text-align: center">
+                    <%= f.submit "ВОЙТИ", { :class=>"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"} %>
+                  </div>
+                </div>
+
+                <div class="group">
+                  <div class = "center-link">
+                    <%= link_to 'Забыли пароль?', new_account_password_path %>
+                  </div>
+                </div>
+          <% end %>
+
+          </div>
+        </div>
+      </div>
+
+</div>

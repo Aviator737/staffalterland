@@ -1,0 +1,30 @@
+<%= form_for :task, url: task_index_path do |f| %>
+    <p>
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :workers %><br>
+      <%= f.text_field :workers %>
+    </p>
+    <p>
+      <%= f.label :time %><br>
+      <%= f.number_field :time %>
+    </p>
+    <p>
+      <%= f.label :coords %><br>
+      <%= f.text_field :coords %>
+    </p>
+
+    <p>
+      <%= f.fields_for :task_images do |p| %>
+        <div class="field">
+          <%= p.label :image %><br>
+          <%= p.file_field :image, :multiple => true, name: "task_images[image][]" %>
+        </div>
+    <% end %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+<% end %>
