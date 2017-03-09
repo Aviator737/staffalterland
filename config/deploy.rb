@@ -9,8 +9,10 @@ set :deploy_to, '/var/www/staff.alterland.ru'
 
 set :log_level, :info
 # Копирующиеся файлы и директории (между деплоями)
-set :linked_files, %w{config/database.yml config/settings.yml}
+set :linked_files, %w{config/database.yml config/secrets.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/uploads}
+
+# Ruby свистелки
 
 
 # Ruby свистелки
