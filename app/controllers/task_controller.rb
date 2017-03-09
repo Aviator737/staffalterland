@@ -7,8 +7,8 @@ class TaskController < ApplicationController
   end
 
   def new
-  @task = Task.new
-  @task_image = @task.task_images.build
+    @task = Task.new
+    @task_image = @task.task_images.build
   end
 
   def show
@@ -38,12 +38,14 @@ class TaskController < ApplicationController
   end
 
   private
-  def task_params
-    params.require(:task).permit(:title, :coords, :workers, :time, task_images_attributes: [:id, :task_id, :image])
-  end
-  def is_builder?
-    if (current_account.group).to_i < 2
-      redirect_to edit_account_registration_path
+
+    def task_params
+      params.require(:task).permit(:title_image, :title, :coords, :workers, :time, task_images_attributes: [:id, :task_id, :image])
     end
-  end
+
+    def is_builder?
+      if (current_account.group).to_i < 2
+        redirect_to edit_account_registration_path
+      end
+    end
 end

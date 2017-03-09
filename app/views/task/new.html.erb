@@ -1,5 +1,9 @@
 <%= form_for :task, url: task_index_path do |f| %>
     <p>
+      Обложка задания
+      <%= f.file_field :title_image , html: { multipart: true }%>
+    </p>
+    <p>
       <%= f.label :title %><br>
       <%= f.text_field :title %>
     </p>
@@ -19,7 +23,6 @@
     <p>
       <%= f.fields_for :task_images do |p| %>
         <div class="field">
-          <%= p.label :image %><br>
           <%= p.file_field :image, :multiple => true, name: "task_images[image][]" %>
         </div>
     <% end %>

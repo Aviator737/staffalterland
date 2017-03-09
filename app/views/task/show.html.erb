@@ -2,12 +2,12 @@
     <title>Задачи Alterland</title>
 <% end %>
 
-<p><%= @task.id %></p>
-<p><%= @task.title %></p>
-<p><%= @task.workers %></p>
-<p><%= @task.time %></p>
-<p><%= @task.coords %></p>
-<p><%= @task.created_at %></p>
+<p>№ <%= @task.id %></p>
+<p>Название: <%= @task.title %></p>
+<p>Выполняют: <%= @task.workers %></p>
+<p>Время на выполнение: <%= @task.time %></p>
+<p>Координаты: <%= @task.coords %></p>
+<p>Создано: <%= @task.created_at %></p>
 <p>
 <% @task_image.each do |p| %>
     <%= image_tag p.image_url %>

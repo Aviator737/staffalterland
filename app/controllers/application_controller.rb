@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     end
 
     def layout
-      if devise_controller? && resource_name == :account && action_name == "edit"
+      if devise_controller? && resource_name == :account && action_name == "edit" && account_signed_in?
         'dashboard'
       else
         'application'
