@@ -50,10 +50,12 @@ group :development do
 end
 
 group :development do
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rvm'
+  gem "capistrano"
+  gem "rvm-capistrano"
+end
+
+group :production do
+  gem 'unicorn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -68,5 +70,3 @@ gem 'material_design_lite-rails', '~> 1.3'
 gem 'carrierwave'
 
 gem 'mini_magick'
-
-gem 'unicorn'
