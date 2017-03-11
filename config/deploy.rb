@@ -8,7 +8,7 @@ set :repo_url, "https://github.com/Aviator737/staffalterland.git"
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/#{:application}"
+set :deploy_to, "/var/www/staff.alterland.ru"
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
@@ -31,8 +31,7 @@ set :rvm_ruby_version, '2.4.0'
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :passenger_environment_variables, { :path => '/usr/lib/ruby/vendor_ruby/phusion_passenger/bin:$PATH' }
-set :passenger_restart_command, '/usr/lib/ruby/vendor_ruby/phusion_passenger/bin/passenger-config restart-app'
+#set :passenger_restart_command, '/usr/bin/passenger-config restart-app'
 
 namespace :deploy do
 
