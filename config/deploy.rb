@@ -1,5 +1,5 @@
 # Change these
-server 'alterland.ru', port: 80, roles: [:web, :app, :db], primary: true
+server 'alterland.ru', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:Aviator737/staffalterland.git'
 set :application,     'staff.alterland.ru'
