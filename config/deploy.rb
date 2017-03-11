@@ -31,7 +31,10 @@ set :rvm_ruby_version, '2.4.0'
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-#set :passenger_restart_command, '/usr/bin/passenger-config restart-app'
+set :passenger_restart_command, '/usr/bin/passenger-config restart-app'
+
+set :passenger_restart_with_touch, true
+set :passenger_restart_with_sudo, true
 
 namespace :deploy do
 
