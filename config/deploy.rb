@@ -1,61 +1,84 @@
-# config valid only for current version of Capistrano
-lock "3.7.2"
+# Change these
+server 'alterland.ru', port: 80, roles: [:web, :app, :db], primary: true
 
-set :application, 'staff.alterland.ru'
-set :repo_url, 'https://github.com/Aviator737/staffalterland.git'
-set :deploy_to, '/var/www/staff.alterland.ru'
-set :user, 'aviator737'
-set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets}
-set :rails_env, "production"
+set :repo_url,        'git@github.com:Aviator737/staffalterland.git'
+set :application,     'staff.alterland.ru'
+set :user,            'aviator737'
+set :puma_threads,    [4, 16]
+set :puma_workers,    0
 
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+# Don't change these unless you know what you're doing
+set :pty,             true
+set :use_sudo,        false
+set :stage,           :production
+set :deploy_via,      :remote_cache
+set :deploy_to,       "/var/www/staff.alterland.ru"
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log,  "#{release_path}/log/puma.access.log"
+set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
+set :puma_preload_app, true
+set :puma_worker_timeout, nil
+set :puma_init_active_record, false  # Change to true if using ActiveRecord
 
-# Default value for :format is :airbrussh.
-# set :format, :airbrussh
+## Defaults:
+# set :scm,           :git
+# set :branch,        :master
+# set :format,        :pretty
+# set :log_level,     :debug
+# set :keep_releases, 5
 
-# You can configure the Airbrussh format using :format_options.
-# These are the defaults.
-# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
+## Linked Files & Directories (Default None):
+# set :linked_files, %w{config/database.yml}
+# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-# Default value for :pty is false
-# set :pty, true
-
-# Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/secrets.yml"
-
-# Default value for linked_dirs is []
-# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
-
-# Default value for default_env is {}
-#set :default_env, { path: "/opt/ruby/bin:$PATH" }
-
-# Default value for keep_releases is 5
-set :keep_releases, 3
-
-set :rbenv_type, :user
-set :rbenv_ruby, '2.4.0'
-set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
-set :rbenv_roles, :all
-
-set :puma_init_active_record, true
-
-set :branch, "master" # Ветка из которой будем тянуть код для деплоя.
-set :deploy_via, :remote_cache # Указание на то, что стоит хранить кеш репозитария локально и с каждым деплоем лишь подтягивать произведенные изменения. Очень актуально для больших и тяжелых репозитариев.
-
-set :unicorn_conf, "#{deploy_to}/current/config/unicorn.rb"
-set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
-
-# Далее идут правила для перезапуска unicorn. Их стоит просто принять на веру - они работают.
-# В случае с Rails 3 приложениями стоит заменять bundle exec unicorn_rails на bundle exec unicorn
-namespace :deploy do
-  task :restart do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -USR2 `cat #{unicorn_pid}`; else cd #{deploy_to}/current && bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D; fi"
+namespace :puma do
+  desc 'Create Directories for Puma Pids and Socket'
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
+    end
   end
-  task :start do
-    run "bundle exec unicorn_rails -c #{unicorn_conf} -E #{rails_env} -D"
-  end
-  task :stop do
-    run "if [ -f #{unicorn_pid} ] && [ -e /proc/$(cat #{unicorn_pid}) ]; then kill -QUIT `cat #{unicorn_pid}`; fi"
-  end
+
+  before :start, :make_dirs
 end
+
+namespace :deploy do
+  desc "Make sure local git is in sync with remote."
+  task :check_revision do
+    on roles(:app) do
+      unless `git rev-parse HEAD` == `git rev-parse origin/master`
+        puts "WARNING: HEAD is not the same as origin/master"
+        puts "Run `git push` to sync changes."
+        exit
+      end
+    end
+  end
+
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      before 'deploy:restart', 'puma:start'
+      invoke 'deploy'
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
+    end
+  end
+
+  before :starting,     :check_revision
+  after  :finishing,    :compile_assets
+  after  :finishing,    :cleanup
+  after  :finishing,    :restart
+end
+
+# ps aux | grep puma    # Get puma pid
+# kill -s SIGUSR2 pid   # Restart puma
+# kill -s SIGTERM pid   # Stop puma
