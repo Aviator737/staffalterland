@@ -1,34 +1,59 @@
-# Change these
-server 'alterland.ru', roles: [:web, :app, :db], primary: true
+set :application, 'staff.alterland.ru'
+set :repo_url, 'https://github.com/Aviator737/staffalterland.git'
+set :deploy_to, '/var/www/staff.alterland.ru'
+set :user, 'aviator737'
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets}
+set :rails_env, "production"
 
-set :repo_url,        'https://github.com/Aviator737/staffalterland.git'
-set :application,     'staff.alterland.ru'
-set :user,            'aviator737'
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
+# Default branch is :master
+# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+
+# Default value for :format is :airbrussh.
+# set :format, :airbrussh
+
+# You can configure the Airbrussh format using :format_options.
+# These are the defaults.
+# set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
+
+# Default value for :pty is false
+# set :pty, true
+
+# Default value for :linked_files is []
+append :linked_files, "config/database.yml", "config/secrets.yml"
+
+# Default value for linked_dirs is []
+# append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+
+# Default value for default_env is {}
+#set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+set :keep_releases, 3
+
+set :puma_init_active_record, true
+
+set :branch, "master" # Ветка из которой будем тянуть код для деплоя.
+set :deploy_via, :remote_cache # Указание на то, что стоит хранить кеш репозитария локально и с каждым деплоем лишь подтягивать произведенные изменения. Очень актуально для больших и тяжелых репозитариев.
 
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
-set :deploy_via,      :remote_cache
-set :deploy_to,       "/var/www/staff.alterland.ru"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "#{release_path}/log/puma.error.log"
 set :puma_error_log,  "#{release_path}/log/puma.access.log"
-set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, false  # Change to true if using ActiveRecord
 
 ## Defaults:
 # set :scm,           :git
-set :branch,        :master
+# set :branch,        :master
 # set :format,        :pretty
 # set :log_level,     :debug
-set :keep_releases, 3
+# set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
