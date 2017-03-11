@@ -25,10 +25,10 @@ set :puma_init_active_record, false  # Change to true if using ActiveRecord
 
 ## Defaults:
 # set :scm,           :git
-# set :branch,        :master
+set :branch,        :master
 # set :format,        :pretty
 # set :log_level,     :debug
-# set :keep_releases, 5
+set :keep_releases, 3
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
