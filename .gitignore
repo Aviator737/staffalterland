@@ -19,5 +19,6 @@
 /.idea/*
 /config/secrets.yml
 /config/database.yml
+/config/deploy.rb
 /deploy/*
 /Capfile/*
