@@ -88,6 +88,15 @@
     </ul>
     </div>
   </div>
+  <% if Task.count == 0 %>
+      <div class = "no-tasks">
+        <h3>Заданий нет!</h3>
+        <%if current_account.group=='5'%>
+        <p>Чтобы добавить задание, нажмите на кнопку в правом нижнем углу.</p>
+        <% end %>
+        <p style="color: #E91E63;">Это ошибка? Обратитесь к администратору.</p>
+      </div>
+  <% end %>
 </div>
 
 <%if current_account.group=='5'%>

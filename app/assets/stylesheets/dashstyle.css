@@ -137,6 +137,13 @@
 	font-size: 11px;
 }
 
+.no-tasks{
+    width: 100%;
+    color: #616161;
+    text-align: center;
+}
+
+
 .task-name {
   color: #fff;
   width: 100%;
