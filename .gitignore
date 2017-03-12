@@ -16,6 +16,8 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-.idea/
-config/secrets.yml
-config/database.yml
+/.idea/*
+/config/secrets.yml
+/config/database.yml
+/deploy/*
+/Capfile/*
