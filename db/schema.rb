@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20170318171341) do
     t.string   "donate"
     t.string   "group"
     t.string   "password_salt"
-    t.boolean  "legacy_password"
     t.string   "old_passwd"
     t.index ["confirmation_token"], name: "index_accounts_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_accounts_on_email", unique: true, using: :btree

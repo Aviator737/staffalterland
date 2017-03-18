@@ -2,3 +2,12 @@
     <%= post.title %>
     <%= post.text %>
 <%end%>
+<% if Post.count == 0 %>
+    <div class = "no-tasks">
+      <h3>Новостей нет!</h3>
+      <%if current_account.group=='5'%>
+          <p></p>
+      <% end %>
+      <p style="color: #E91E63;"></p>
+    </div>
+<% end %>
