@@ -63,5 +63,7 @@ gem 'material_design_lite-rails', '~> 1.3'
 
 gem 'mini_magick'
 
+gem 'carrierwave'
+
 gem 'image_optim'
 gem 'image_optim_pack'
