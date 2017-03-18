@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227150440) do
+ActiveRecord::Schema.define(version: 20170318171341) do
 
   create_table "accounts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                  default: "", null: false
@@ -32,8 +32,9 @@ ActiveRecord::Schema.define(version: 20170227150440) do
     t.string   "login"
     t.string   "donate"
     t.string   "group"
-    t.string   "encrypted_old_password"
     t.string   "password_salt"
+    t.boolean  "legacy_password"
+    t.string   "old_passwd"
     t.index ["confirmation_token"], name: "index_accounts_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_accounts_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
