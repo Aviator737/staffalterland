@@ -10,7 +10,7 @@ class Account < ActiveRecord::Base
     if self.encrypted_password.blank?
       if Digest::MD5.hexdigest(password) == self.old_passwd
         self.password = password
-        self.old_passwd = nil
+        self.old_passwd = nil 
         self.save!
         true
       else
