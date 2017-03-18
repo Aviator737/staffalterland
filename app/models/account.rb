@@ -7,15 +7,17 @@ class Account < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   def valid_password?(password)
-    if self.encrypted_password.blank?
-      if Digest::MD5.hexdigest(password) == self.old_passwd
+    if self.old_passwd.present?
+      if ::Digest::MD5.hexdigest(password) == self.old_passwd
         self.password = password
-        self.old_passwd = nil 
+        self.old_passwd = nil
         self.save!
         true
       else
         false
       end
+    else
+      super
     end
   end
 end
