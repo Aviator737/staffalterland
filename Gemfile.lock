@@ -60,10 +60,6 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    carrierwave (1.0.0)
-      activemodel (>= 4.0.0)
-      activesupport (>= 4.0.0)
-      mime-types (>= 1.16)
     coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.2.x)
@@ -83,10 +79,23 @@ GEM
       devise (>= 2.1.0)
     erubis (2.7.0)
     execjs (2.7.0)
+    exifr (1.2.5)
     ffi (1.9.18)
+    fspath (3.0.3)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.8.1)
+    image_optim (0.24.2)
+      exifr (~> 1.2, >= 1.2.2)
+      fspath (~> 3.0)
+      image_size (~> 1.5)
+      in_threads (~> 1.3)
+      progress (~> 3.0, >= 3.0.1)
+    image_optim_pack (0.3.1.20170311)
+      fspath (>= 2.1, < 4)
+      image_optim (~> 0.19)
+    image_size (1.5.0)
+    in_threads (1.3.1)
     jbuilder (2.6.3)
       activesupport (>= 3.0.0, < 5.2)
       multi_json (~> 1.2)
@@ -119,6 +128,7 @@ GEM
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
+    progress (3.3.1)
     puma (3.8.1)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -205,10 +215,11 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails
   capistrano-rvm
-  carrierwave
   coffee-rails (~> 4.2)
   devise
   devise-encryptable
+  image_optim
+  image_optim_pack
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

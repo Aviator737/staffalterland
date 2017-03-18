@@ -61,6 +61,7 @@ gem 'devise-encryptable'
 
 gem 'material_design_lite-rails', '~> 1.3'
 
-gem 'carrierwave'
-
 gem 'mini_magick'
+
+gem 'image_optim'
+gem 'image_optim_pack'
