@@ -20,4 +20,8 @@ class Account < ActiveRecord::Base
       super
     end
   end
+
+  def validate_auth
+
+  end
 end
