@@ -1,7 +1,7 @@
 class Account < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable, :encryptable
 
   mount_uploader :avatar, AvatarUploader
@@ -19,9 +19,5 @@ class Account < ActiveRecord::Base
     else
       super
     end
-  end
-
-  def validate_auth
-
   end
 end
