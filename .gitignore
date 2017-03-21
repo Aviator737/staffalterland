@@ -17,8 +17,22 @@
 .byebug_history
 
 /.idea/*
+/config/environments/*
 /config/secrets.yml
 /config/database.yml
 /config/deploy.rb
 /config/deploy/*
 /Capfile/*
+Будет удалено app/assets/javascripts/authlauncher.coffee
+Будет удалено app/assets/stylesheets/authlauncher.scss
+Будет удалено app/helpers/authlauncher_helper.rb
+Будет удалено config/deploy/
+Будет удалено db/migrate/20170318171341_add_old_password_to_account.rb
+Будет удалено lib/capistrano/
+Будет удалено public/uploads/task/title_image/43/
+Будет удалено public/uploads/task_image/image/52/
+Будет удалено public/uploads/task_image/image/53/
+Будет удалено public/uploads/task_image/image/54/
+Будет удалено public/uploads/task_image/image/55/
+Будет удалено public/uploads/task_image/image/56/
+Будет удалено test/controllers/authlauncher_controller_test.rb
