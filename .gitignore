@@ -25,7 +25,7 @@
 /Capfile/*
 Будет удалено app/assets/javascripts/authlauncher.coffee
 Будет удалено app/assets/stylesheets/authlauncher.scss
-Будет удалено app/helpers/authlauncher_helper.rb
+Буде удалено app/helpers/authlauncher_helper.rb
 Будет удалено config/deploy/
 Будет удалено db/migrate/20170318171341_add_old_password_to_account.rb
 Будет удалено lib/capistrano/
