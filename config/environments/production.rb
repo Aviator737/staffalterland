@@ -85,12 +85,12 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #SMTP
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'staff.alterland.ru' }
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
       address:"smtp.yandex.ru",
       port: 587,
-      domain: "localhost:3000",
+      domain: "staff.alterland.ru",
       authentication: "plain",
       user_name: "confirm@alterland.ru",
       password: "fQZhXT"
