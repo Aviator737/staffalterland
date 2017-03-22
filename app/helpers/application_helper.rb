@@ -17,4 +17,11 @@ module ApplicationHelper
         'Неизвестный'
     end
   end
+  def errors_for(model, attribute)
+    if model.errors[attribute].present?
+      content_tag :span, :class => 'mdl-textfield__error' do
+        model.errors[attribute].join(", ")
+      end
+    end
+  end
 end

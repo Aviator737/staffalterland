@@ -120,3 +120,6 @@
     right: inherit;
     margin-left: 10px;
 }
+.mdl-textfield__error{
+    visibility: visible;
+}
